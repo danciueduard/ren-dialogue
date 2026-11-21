@@ -14,22 +14,21 @@ You need **Windows 64-bit**, **Project Zomboid Build 42.21 or newer**, and a **s
 Normal mode: Can be played with the server running. At least 8GB of VRAM (minimum RTX 3070Ti recommended)
 !!!! Viewpoint: Run the server on a different computer connected to the same network as the gaming PC. The AI model will eat at least 3GB of VRAM and both apps will race for the VRAM generating huge fps drops. 
 
-### 1. Download and unzip
+### 1. Download and start the bridge
 
 1. On this GitHub page, click **Code** above the file list, then **Download ZIP**.
 2. Open your Windows **Downloads** folder. Right-click the ZIP you downloaded, choose **Extract All**, then click **Extract**.
-3. Open the extracted project folder. If you see another folder called `ren-dialogue-main` inside it, open that too. You should now see `install-ren-mod.cmd` and a folder called `release`.
+3. Open the extracted project folder. If you see another folder called `ren-dialogue-main` inside it, open that too. You should now see a folder called `release`.
 4. Open `release`. Right-click `RenDialogue-Windows-x64.zip`, choose **Extract All**, and click **Extract** again.
-5. In the extracted files, open the `RenDialogue` folder and find **Ren Dialogue.exe**. Keep the `data` and `ai model` folders beside it.
+5. In the extracted files, open the `RenDialogue` folder and you should find **Ren Dialogue.exe**, **data** and **ai model** . Keep the `data` and `ai model` folders beside it. You are free to move that folder wherever you want. That folder will store your interactions with Ren and the events happened.
 
 ### 2. Install and enable the two mods on your gaming PC
 
-1. Close Project Zomboid.
-2. Open the Stay With Me page in Steam, click **Subscribe**, and wait for Steam to finish downloading it. [Stay With Me on Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3800989007)
-3. Go back to the extracted project folder from step 1. Double-click **install-ren-mod.cmd** to install **Ren Dialogue for Stay With Me**. If it says the mod is already installed, follow the [update steps](#updating-an-existing-installation).
-4. Start Project Zomboid. From the main menu, open **Mods** and enable **Stay With Me** and **Ren Dialogue for Stay With Me**. If you're using an existing save, choose **Load**, select your save, then go to **More… → Choose Mods…** and enable both mods for that save.
+1. Close Project Zomboid if open.
+2. Open the Stay With Me page in Steam, click **Subscribe**, and wait for Steam to finish downloading it. [Stay With Me on Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3800989007) and [Ren Dialogue for Stay With Me (Alpha Testing)](https://steamcommunity.com/sharedfiles/filedetails/?id=3843689875)
+3. Start Project Zomboid. From the main menu, open **Mods** and enable **Stay With Me** and **Ren Dialogue for Stay With Me**. If you're using an existing save, choose **Load**, select your save, then go to **More… → Choose Mods…** and enable both mods for that save. Don't load the save yet. RECOMMENDED: backup the save.
 
-### 3. Start Ren Dialogue
+### 3. Start Ren Dialogue Bridge.
 
 Pick the setup that matches your computers.
 
