@@ -1,103 +1,116 @@
 # Ren Dialogue for Stay With Me
 
-## Windows release
+**Alpha · Early testing.** Ren Dialogue lets you type messages to your Stay With Me companion in Project Zomboid. You may run into bugs, slow replies, or incorrect AI replies. The source is available here, and anyone can help by testing, reporting bugs, improving the instructions, or contributing code.
 
-Extract `release/RenDialogue-Windows-x64.zip` and launch `Ren Dialogue.exe`
-inside the extracted `RenDialogue` folder. Follow `START HERE.txt`. Enable
-Stay With Me and the Ren Dialogue add-on in Project Zomboid. The executable
-bridges the game and Ollama. The gaming PC can connect to a host by pasting a
-connection code. The bridge downloads and runs a private copy of Ollama and the
-model under `ai model` on the PC doing inference. An existing Ollama installation
-can run separately.
+## Quick start
 
-This PC and Host for another PC write to `data/rin.db`. An upgrade copies
-`%LOCALAPPDATA%\RinDialogue\rin.db` on first start if the portable database is
-missing. Connect to a host downloads `data/host-rin.db` and refreshes it during
-the session. The host remains the only writer. The separate client filename
-preserves your local conversation when you switch modes. Use the updated
-release on both PCs for sync. Stop the bridge before moving its folder.
+You need **Windows 64-bit**, **Project Zomboid Build 42.21 or newer**, and a **single-player** game. The PC running the AI needs internet access for the first download, which is about **5 GB**. The app downloads everything it needs.
 
-For developers, install PyInstaller and run `python build_windows.py` to rebuild
-the Windows x64 archive. Source-level command-line options follow.
+## Minimum requirements
 
-## Laptop backend and gaming PC from source
+- at least 6GB of VRAM for the server (tested on RTX 4050 laptop)
+- over 12 GB of VRAM if you intend to run it on the same computer you are playing PZ 
 
-1. On the laptop, start Ollama, then run `start-ren-lan.cmd`. It listens on
-   port **8011** and displays the access key for your PC relay.
-2. On the gaming PC, run `start-ren-relay.cmd` from a local copy of the source,
-   enter the laptop's access key, and leave the relay open.
-   The relay only forwards messages. Ollama and SQLite run on the laptop.
-3. In a single-player save with both mods enabled, right-click and choose
-   **Ren Dialogue backend...**. Enter the laptop's address, for example
-   `http://192.168.1.16:8011`. The add-on saves the address on the gaming PC.
-4. Select **Ren Dialogue status** to check the connection. Then stand near your
-   companion and choose **Talk to [name] (AI)**. An updated address takes effect without
-   restarting the game or relay.
+Normal mode: Can be played with the server running. At least 8GB of VRAM (minimum RTX 3070Ti recommended)
+!!!! Viewpoint: Run the server on a different computer connected to the same network as the gaming PC. The AI model will eat at least 3GB of VRAM and both apps will race for the VRAM generating huge fps drops. 
 
-Keep the two computers on the same trusted private network. The laptop's
-Windows Firewall must allow inbound TCP 8011 on that network. Use the laptop's
-current LAN IPv4 address if it changes. Set `REN_BIND_HOST` before starting the
-laptop launcher to bind it to a particular interface address.
+### 1. Download and unzip
 
-## Local engine on the game PC
+1. On this GitHub page, click **Code** above the file list, then **Download ZIP**.
+2. Open your Windows **Downloads** folder. Right-click the ZIP you downloaded, choose **Extract All**, then click **Extract**.
+3. Open the extracted project folder. If you see another folder called `ren-dialogue-main` inside it, open that too. You should now see `install-ren-mod.cmd` and a folder called `release`.
+4. Open `release`. Right-click `RenDialogue-Windows-x64.zip`, choose **Extract All**, and click **Extract** again.
+5. In the extracted files, open the `RenDialogue` folder and find **Ren Dialogue.exe**. Keep the `data` and `ai model` folders beside it.
 
-If you run everything on one computer, start Ollama, run `start-ren.cmd` and
-leave the in-game backend field blank.
-If the model is missing, run `ollama pull qwen3.5:4b`.
+### 2. Install and enable the two mods on your gaming PC
 
-A first launch without a virtual environment needs Python 3.11 or newer. When
-moving to another PC, copy the source files and recreate the virtual environment
-there. The fork keeps its own `database/rin.db` with one companion profile and a
-separate conversation for each survivor. One model call produces each reply. The companion sees
-up to four preceding exchanges and six remembered details, and replies in
-at most 140 characters. Say “Remember that …” to keep a detail available
-past the recent dialogue. The companion also retains simple player-stated counts like
-“I have 99 lemons” and uses the latest count when you state it again.
+1. Close Project Zomboid.
+2. Open the Stay With Me page in Steam, click **Subscribe**, and wait for Steam to finish downloading it. [Stay With Me on Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3800989007)
+3. Go back to the extracted project folder from step 1. Double-click **install-ren-mod.cmd** to install **Ren Dialogue for Stay With Me**. If it says the mod is already installed, follow the [update steps](#updating-an-existing-installation).
+4. Start Project Zomboid. From the main menu, open **Mods** and enable **Stay With Me** and **Ren Dialogue for Stay With Me**. If you're using an existing save, choose **Load**, select your save, then go to **More… → Choose Mods…** and enable both mods for that save.
 
-Optional environment variables
+### 3. Start Ren Dialogue
 
-| Variable | Default |
+Pick the setup that matches your computers.
+
+**One PC for the game and the AI**
+
+1. Open **Ren Dialogue.exe**.
+2. Select **This PC**, then click **Start Ren**.
+3. If asked to download the model, click **Yes**. Wait for the app to say **The bridge is running**. Keep the app open while you play.
+
+**Two PCs on the same home network**
+
+1. Pick the PC that will run the AI. This is the **host**. Copy the extracted `RenDialogue` folder to it so both PCs use the same bridge version.
+2. On the host, open **Ren Dialogue.exe**, select **Host for another PC**, then click **Start hosting**. Approve the model download and the private-network firewall prompt if shown.
+3. When the app says **Hosting on this PC**, click **Copy connection code**. Send that code to your gaming PC.
+4. On the gaming PC, open **Ren Dialogue.exe**, select **Connect to a host**, paste the code, and click **Connect**. Wait for the app to say **Connected**.
+5. Leave the app open on both PCs. Share the code only with people you trust. A connected PC receives a copy of the host's conversation database.
+
+### 4. Talk to your companion
+
+1. Start or load a **single-player** game with both mods enabled.
+2. Stand within **three tiles** of your companion, on the **same floor**.
+3. Press **F9**, or right-click the ground and choose **Talk to [name] (AI)**.
+4. Type a short message and press **Enter** or click **Send**. The reply appears in your companion's speech bubble. The first reply can take longer while the AI loads.
+
+To change **F9**, go to **Options → Key Bindings → Ren Dialogue → Open companion chat**.
+
+## If something goes wrong
+
+- **The chat option is missing.** Check that both mods are enabled for the save you loaded. Stand beside your companion and try the right-click menu.
+- **The game cannot reach the bridge.** Right-click in the game and select **Ren Dialogue status**. Make sure the app is open. With two PCs, check that both are on the same private network and the host is still hosting.
+- **You use a custom Zomboid folder.** Stop the bridge, click **Game folder…**, and select your Zomboid folder, the one that contains your `Lua` and `mods` folders. Then start the bridge again. The default is `%USERPROFILE%\Zomboid`.
+- **Something else broke.** Open the repository's **Issues** tab. Include your Zomboid build, whether you used one or two PCs, the steps you took, and the exact error you saw. Leave out your connection code and conversation database.
+
+### Updating an existing installation
+
+1. Close Project Zomboid and stop the bridge.
+2. Open the extracted project folder in File Explorer. Click the address bar at the top, type `cmd`, and press **Enter**.
+3. In the window that opens, type the command below and press **Enter**.
+
+```bat
+install-ren-mod.cmd /update
+```
+
+When you replace the bridge, keep your `data` and `ai model` folders beside the new **Ren Dialogue.exe**. If you use two PCs, update both bridge copies.
+
+## What Ren Dialogue remembers
+
+The bridge uses your companion's in-game name, current friendship and romance scores, and selected recent events. **Stay With Me controls gameplay and relationship progress.** Compliments and flirting through AI chat leave the mod's scores as they were.
+
+The bridge keeps a short recent chat history. You can also say “Remember that I have 99 lemons” to bring that detail back in a later chat. Your companion may recall recent treatment, newly noticed bullet wounds, or possible crashes flagged by Stay With Me.
+
+The PC running the AI saves chats to `data/rin.db`. In two-PC mode, the gaming PC keeps a synced copy at `data/host-rin.db`. On first start, the bridge can copy a database from the old `%LOCALAPPDATA%\RinDialogue` folder if the portable database is missing.
+
+## Contributing
+
+Testing, bug reports, documentation edits, and code changes are all welcome. Use **Issues** for bugs or ideas. To propose a change, fork the repository and open a pull request. Tell us what changed and how you tested it.
+
+### Build the Windows bridge
+
+Use Python 3.11 or newer. Run these commands from the project folder.
+
+```bat
+py -3 -m venv .venv
+.venv\Scripts\python.exe -m pip install -r requirements.txt pyinstaller
+.venv\Scripts\python.exe build_windows.py
+.venv\Scripts\python.exe -B -m unittest discover -s tests -v
+```
+
+The Windows build creates `release/RenDialogue-Windows-x64.zip`. The Workshop item is in [mod/RenDialogue-Workshop](mod/RenDialogue-Workshop). The add-on keeps the mod ID `RinDialogue` for existing saves.
+
+### Run from source
+
+Start Ollama and run `ollama pull qwen3.5:4b`. For one PC, run `start-ren.cmd` and leave the in-game **Ren Dialogue backend…** address blank. For two PCs, run `start-ren-lan.cmd` on the host and `start-ren-relay.cmd` on the gaming PC. Enter the host's access key in the relay, then set the host address in the game's right-click menu under **Ren Dialogue backend…**. For example, enter `http://192.168.1.16:8011`. The host listens on TCP port 8011.
+
+| Setting | Default |
 | --- | --- |
 | `REN_MODEL` | `qwen3.5:4b` |
-| `REN_OLLAMA_URL` | `http://127.0.0.1:11434/api/chat` |
+| `REN_OLLAMA_URL` | `http://127.0.0.1:11434/api/chat` for the source launcher |
 | `REN_LUA_DIR` | `%USERPROFILE%\Zomboid\Lua` |
-| `REN_WARMUP` | `1` (set to `0` to skip preloading the model) |
-| `REN_BIND_HOST` | `0.0.0.0` for the laptop LAN launcher |
-| `REN_API_TOKEN` | Optional preconfigured access key for both launchers |
+| `REN_WARMUP` | `1`. Set to `0` to skip preloading the model. |
+| `REN_BIND_HOST` | `0.0.0.0` for the source LAN launcher |
+| `REN_API_TOKEN` | Optional preconfigured access key |
 
-Use `REN_LUA_DIR` for a custom game cache. Existing `RIN_*` variables are
-accepted when their `REN_*` equivalents are unset. Run one engine per game cache. The
-loopback API listens at `http://127.0.0.1:8011`.
-
-## Steam Workshop add-on
-
-The upload-ready Workshop item is `mod/RenDialogue-Workshop`. For a local
-installation, run `install-ren-mod.cmd` or copy the `RinDialogue` folder inside
-its `Contents/mods` into `%USERPROFILE%\Zomboid\mods`. To update an existing
-local install, run `install-ren-mod.cmd /update` so the old Lua entry point
-is replaced. The add-on keeps mod ID `RinDialogue` for existing saves.
-
-1. Enable **Stay With Me** (mod ID `Bridge`) and **Ren Dialogue for Stay With Me**
-   on your Build 42 save.
-2. In single-player, stand within three tiles of your companion on the same
-   floor. Press **F9** or choose **Talk to [name] (AI)** from the right-click
-   menu. Type a short message and click **Send** or press **Enter**.
-3. To rebind F9, go to **Options → Key Bindings → Ren Dialogue → Open companion chat**.
-
-The add-on targets Build 42.21+ and the supplied Stay With Me 0.6.8 integration.
-The chat uses the companion's in-game name and falls back to Ren when no name
-is supplied. Stay With Me controls relationship
-progression. The bridge reads friendship, romance eligibility and score, days
-together, kill count, combat fatigue and current activity. The latest snapshot
-per survivor is recorded in SQLite's `rin_game_state` table, including updates
-between messages. Chat uses the snapshot taken when you send it.
-
-For recent context, the add-on can report completed companion treatment, a
-new bullet wound noticed while the companion is nearby, and possible crashes
-flagged by Stay With Me's driving dialogue. These observations can be recalled
-for up to 15 minutes.
-The first reply may take longer while Ollama loads the model.
-
-## Tests
-
-Run `.venv\Scripts\python.exe -B -m unittest discover -s tests -v`.
+Older `RIN_*` settings still work when their `REN_*` equivalents are unset.
