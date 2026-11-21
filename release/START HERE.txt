@@ -1,0 +1,42 @@
+Ren Dialogue Bridge
+Windows 64-bit · Project Zomboid Build 42.21+ · Single-player
+
+On the gaming PC, enable Stay With Me and the updated Ren Dialogue add-on.
+For a local install, use install-ren-mod.cmd from the project source or
+copy the RinDialogue folder from the Workshop item's Contents\mods into
+Zomboid\mods.
+For an existing local install, use install-ren-mod.cmd /update.
+Use one copy of the add-on and update the bridge on both PCs.
+
+Extract the ZIP and open Ren Dialogue.exe inside the RenDialogue folder.
+Keep data and ai model next to the EXE. Leave the bridge open while playing.
+
+ONE COMPUTER
+1. Select This PC and click Start Ren. On a fresh copy, approve the one-time
+   download of Ollama (about 1.6 GB) and the model (about 3.3 GB).
+2. Stand near your companion. Press F9 or choose Talk to [name] (AI).
+   Submit with Enter or Send. Rebind via Options > Key Bindings > Ren Dialogue.
+   The bridge saves your conversation in data\rin.db.
+
+TWO COMPUTERS
+1. Use this release on both PCs. On the host, select Host for another PC and
+   click Start hosting. Approve the downloads and the Windows private-network
+   firewall prompt if they appear. The model runs on the host.
+2. Click Copy connection code. On the gaming PC, open Ren Dialogue, select
+   Connect to a host, paste the code, and click Connect.
+3. On the gaming PC, stand near your companion and press F9.
+   The host writes to data\rin.db. The gaming PC refreshes its copy at
+   data\host-rin.db while connected.
+
+On first local or host startup, the bridge copies history from an older
+Windows release if data\rin.db is missing. To move the bridge, stop it and
+copy the entire RenDialogue folder. Extract the standalone Ollama AMD
+add-on into ai model\ollama if you need ROCm GPU support.
+
+If Talk to [name] (AI) is missing, check that both mods are enabled on the save.
+If the computers can't connect, check that both are on the same private network.
+Share the connection code only with trusted PCs. A paired PC receives a
+copy of the host's conversation database. Use a trusted private network.
+
+Stay With Me by Albrecht and ComeAndSee
+https://steamcommunity.com/sharedfiles/filedetails/?id=3800989007

@@ -1,0 +1,11 @@
+version=1
+title=Ren Dialogue for Stay With Me
+description=Talk to your Stay With Me companion in single-player Project Zomboid using a local AI model.
+description=
+description=Stand near your companion and press F9 or choose Talk to [name] (AI) from the right-click menu. Press Enter or click Send. Rebind the hotkey under Options > Key Bindings > Ren Dialogue.
+description=
+description=The add-on reads your companion's in-game name, current friendship and romance settings, and selected recent events. Stay With Me controls relationship progression and gameplay.
+description=
+description=Requires Project Zomboid Build 42.21+, [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3800989007]Stay With Me[/url], and the separate Windows bridge (Ren Dialogue.exe). The model can run on the gaming PC or on a second PC.
+tags=Build 42
+visibility=public
